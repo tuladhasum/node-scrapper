@@ -18,7 +18,11 @@ function getResults(body){
       const result = $(element);
       const title = result.find('.result-title').text();
       const price = $(result.find('.result-price').get(0)).text();
-      const hood = result.find('.result-hood').text();
+      let hood = result.find('.result-hood').text();
+      // if (hood != undefined){
+      //    hood.replace("(","").replace(")","");
+      //    // hood = hood.match(/\((.*)\)/)[1];
+      // }
       const imageData = result.find('a.result-image').attr('data-ids');
       let images = [];
       if(imageData){
