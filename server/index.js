@@ -19,10 +19,9 @@ function getResults(body){
       const title = result.find('.result-title').text();
       const price = $(result.find('.result-price').get(0)).text();
       let hood = result.find('.result-hood').text();
-      // if (hood != undefined){
-      //    hood.replace("(","").replace(")","");
-      //    // hood = hood.match(/\((.*)\)/)[1];
-      // }
+      if (hood){
+         hood = hood.match(/\((.*)\)/)[1];
+      }
       const imageData = result.find('a.result-image').attr('data-ids');
       let images = [];
       if(imageData){
@@ -31,8 +30,10 @@ function getResults(body){
             return `http://images.craiglist.org/${id.split(':')[1]}_300x300.jpg`
          })
       }
+
+      let url = result.find('.result-title.hdrlnk').attr('href');
       results.push({
-         title, price, hood, images
+         title, price, hood, images, url
       });
       // console.log(results);
    });
@@ -51,7 +52,7 @@ app.get('/search/:location/:search_term', (request, response) => {
    // de-structuring
    const {location, search_term} = request.params;
 
-   const url = `https://${location}.craigslist.org/search/msa?=sort=date&query=${search_term}`;
+   const url = `https://${location}.craigslist.org/search/sss?=sort=date&query=${search_term}`;
 
    fetch(url)
       .then(response => response.text())
